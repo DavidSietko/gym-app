@@ -18,7 +18,6 @@ class Listbox extends Widget
     super(x, y, "", widgetColor, borderColor, labelColor, widgetFont);
     this.width = width;
     this.height = height;
-    this.items = items;
     this.label = label;
     this.optionClick = optionClick;
     this.offset = 0;
@@ -38,7 +37,7 @@ class Listbox extends Widget
   }
   public void setupScrollbar()
   {
-    double fraction = (double)VISIBLE_OPTIONS / (double)this.items.size();
+    double fraction = (double)VISIBLE_OPTIONS / (double)this.workout.getExercises().size();
     this.scrollbar = new Scrollbar(this.scrollbarX, this.scrollbarY, this.scrollbarWidth, this.scrollbarHeight, this.getWidgetColor(), BLACK, this.getWidgetFont(), fraction);
   }
   public int getWidth()
@@ -128,7 +127,7 @@ class Listbox extends Widget
   public void updateVisibleOptions()
   {
     int value = this.getScrollbar().getValue();
-    int diff = this.getItems().size() - VISIBLE_OPTIONS;
+    int diff = this.workout.getExercises().size() - VISIBLE_OPTIONS;
     int divisions = (this.scrollbar.getHeight() - this.scrollbar.getSliderHeight()) / (diff);
     
     for(int i = 0; i < diff; i++)
@@ -145,7 +144,7 @@ class Listbox extends Widget
   }
   void draw()
   {
-    int limit = (this.getItems().size() < VISIBLE_OPTIONS ? this.getItems().size() : VISIBLE_OPTIONS);
+    int limit = (this.workout.getExercises().size() < VISIBLE_OPTIONS ? this.workout.getExercises().size() : VISIBLE_OPTIONS);
     for(int i = 0; i < limit; i++)
     {
       stroke(this.getBorderColor());
@@ -163,7 +162,7 @@ class Listbox extends Widget
       text(this.visibleItems[i].getName(), this.getX() + this.getWidth() / 2, this.getY() + (this.getHeight() * i) + (this.getHeight() / 2));
     }
       
-      if(this.getItems().size() > VISIBLE_OPTIONS)
+      if(this.workout.getExercises().size() > VISIBLE_OPTIONS)
       {
         scrollbar.draw();
         this.updateVisibleOptions();

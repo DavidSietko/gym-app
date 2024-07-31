@@ -3,9 +3,9 @@ class ExerciseBox extends Listbox
   private Exercise exercise;
   private Set[] visibleSets;
   
-  ExerciseBox(int x, int y, int width, int height, String label, color widgetColor, color borderColor, color labelColor, PFont widgetFont, ArrayList<String> items, Consumer<Integer> optionClick, Exercise exercise)
+  ExerciseBox(int x, int y, int width, int height, String label, color widgetColor, color borderColor, color labelColor, PFont widgetFont, Workout workout, Consumer<Integer> optionClick, Exercise exercise)
   {
-    super(x, y, width, height, label, widgetColor, borderColor, labelColor, widgetFont, items, optionClick);
+    super(x, y, width, height, label, widgetColor, borderColor, labelColor, widgetFont, workout, optionClick);
     this.exercise = exercise;
     this.visibleSets = new Set[VISIBLE_OPTIONS];
     int limit = (this.exercise.getSets().size() < VISIBLE_OPTIONS ? this.exercise.getSets().size() : VISIBLE_OPTIONS);
