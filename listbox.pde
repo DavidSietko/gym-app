@@ -95,12 +95,12 @@ class Listbox extends Widget
   }
   public void setupVisibleOptions()
   {
-    int limit = (this.getItems().size() > VISIBLE_OPTIONS ? this.getItems().size() : VISIBLE_OPTIONS);
+    int limit = (this.workout.getExercises().size() > VISIBLE_OPTIONS ? this.workout.getExercises().size() : VISIBLE_OPTIONS);
     
     this.visibleItems = new Exercise[limit];
     for(int i = 0; i < visibleItems.length; i++)
     {
-      visibleItems[i] = this.getItems().get(i);
+      visibleItems[i] = this.workout.getExercises().get(i);
     }
   }
   
