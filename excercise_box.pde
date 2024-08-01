@@ -31,9 +31,9 @@ class ExerciseBox extends Listbox
   {
     int value = this.getScrollbar().getValue();
     int diff = this.exercise.getSets().size() - VISIBLE_OPTIONS;
-    int divisions = (this.getScrollbar().getHeight() - this.getScrollbar().getSliderHeight()) / (diff + 1);
+    int divisions = (this.getScrollbar().getHeight() - this.getScrollbar().getSliderHeight()) / (diff);
     
-    for(int i = 0; i < diff; i++)
+    for(int i = 0; i <= diff; i++)
     {
       if(value > divisions * i && value <= divisions * (i + 1))
       {
