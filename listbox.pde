@@ -6,14 +6,14 @@ class Listbox extends Widget
   private Exercise[] visibleItems;
   private int width, height, offset;
   private String label;
-  final int VISIBLE_OPTIONS = 4;
+  private int visibleOptions;
   private int scrollbarWidth, scrollbarHeight;
   private int scrollbarX, scrollbarY;
   private int selected;
   private Scrollbar scrollbar;
   Consumer<Integer> optionClick;
   
-  Listbox(int x, int y, int width, int height, String label, color widgetColor, color borderColor, color labelColor, PFont widgetFont, Workout workout, Consumer<Integer> optionClick)
+  Listbox(int x, int y, int width, int height, String label, color widgetColor, color borderColor, color labelColor, PFont widgetFont, Workout workout, Consumer<Integer> optionClick, int visibleOptions)
   {
     super(x, y, "", widgetColor, borderColor, labelColor, widgetFont);
     this.width = width;
@@ -23,17 +23,17 @@ class Listbox extends Widget
     this.optionClick = optionClick;
     this.offset = 0;
     this.selected = -1;
-    this.visibleItems = new Exercise[VISIBLE_OPTIONS];
-    
+    this.visibleOptions = visibleOptions;
+    this.visibleItems = new Exercise[this.getVisibleOptions()];
     this.scrollbarWidth = this.width / 10;
-    this.scrollbarHeight = this.height * VISIBLE_OPTIONS;
+    this.scrollbarHeight = this.height * this.getVisibleOptions();
     this.scrollbarX = x + this.width;
     this.scrollbarY = y;
     this.setupScrollbar();
   }
   public void setupScrollbar()
   {
-    double fraction = (double)VISIBLE_OPTIONS / (double)this.workout.getExercises().size();
+    double fraction = (double)this.getVisibleOptions() / (double)this.workout.getExercises().size();
     this.scrollbar = new Scrollbar(this.scrollbarX, this.scrollbarY, this.scrollbarWidth, this.scrollbarHeight, this.getWidgetColor(), BLACK, this.getWidgetFont(), fraction);
   }
   public int getWidth()
@@ -51,6 +51,14 @@ class Listbox extends Widget
   public void setHeight(int height)
   {
     this.height = height;
+  }
+  public int getVisibleOptions()
+  {
+    return this.visibleOptions;
+  }
+  public void setVisibleOptions(int visibleOptions)
+  {
+    this.visibleOptions = visibleOptions;
   }
   public int getOffset()
   {
@@ -92,20 +100,19 @@ class Listbox extends Widget
   public void addExercise(String name)
   {
     this.workout.addExercise(name);
-    print(this.workout.getExercises().size());
-    int limit = (this.workout.getExercises().size() < VISIBLE_OPTIONS ? this.workout.getExercises().size() : VISIBLE_OPTIONS);
+    int limit = (this.workout.getExercises().size() < this.getVisibleOptions() ? this.workout.getExercises().size() : this.getVisibleOptions());
     for(int i = 0; i < limit; i++)
     {
       visibleItems[i] = this.workout.getExercises().get(i + this.getOffset());
     }
-    if(this.workout.getExercises().size() > VISIBLE_OPTIONS)
+    if(this.workout.getExercises().size() > this.getVisibleOptions())
     {
       this.setupScrollbar();
     }
   }
   public void setupVisibleOptions()
   {
-    int limit = (this.workout.getExercises().size() > VISIBLE_OPTIONS ? this.workout.getExercises().size() : VISIBLE_OPTIONS);
+    int limit = (this.workout.getExercises().size() > this.getVisibleOptions() ? this.workout.getExercises().size() : this.getVisibleOptions());
     
     this.visibleItems = new Exercise[limit];
     for(int i = 0; i < visibleItems.length; i++)
@@ -137,7 +144,7 @@ class Listbox extends Widget
   public void updateVisibleOptions()
   {
     int value = this.getScrollbar().getValue();
-    int diff = this.workout.getExercises().size() - VISIBLE_OPTIONS;
+    int diff = this.workout.getExercises().size() - this.getVisibleOptions();
     int divisions = (this.scrollbar.getHeight() - this.scrollbar.getSliderHeight()) / (diff);
     
     for(int i = 0; i <= diff; i++)
@@ -145,7 +152,7 @@ class Listbox extends Widget
       if(value >= divisions * i && value <= divisions * (i + 1))
       {
         this.setOffset(i);
-        for(int j = 0; j < VISIBLE_OPTIONS; j++)
+        for(int j = 0; j < this.getVisibleOptions(); j++)
         {
           this.visibleItems[j] = workout.getExercises().get(i + j);
         }
@@ -154,7 +161,7 @@ class Listbox extends Widget
   }
   void draw()
   {
-    int limit = (this.workout.getExercises().size() < VISIBLE_OPTIONS ? this.workout.getExercises().size() : VISIBLE_OPTIONS);
+    int limit = (this.workout.getExercises().size() < this.getVisibleOptions() ? this.workout.getExercises().size() : this.getVisibleOptions());
     for(int i = 0; i < limit; i++)
     {
       stroke(this.getBorderColor());
@@ -172,7 +179,7 @@ class Listbox extends Widget
       text(this.visibleItems[i].getName(), this.getX() + this.getWidth() / 2, this.getY() + (this.getHeight() * i) + (this.getHeight() / 2));
     }
       
-      if(this.workout.getExercises().size() > VISIBLE_OPTIONS)
+      if(this.workout.getExercises().size() > this.getVisibleOptions())
       {
         scrollbar.draw();
         this.updateVisibleOptions();

@@ -3,12 +3,12 @@ class ExerciseBox extends Listbox
   private Exercise exercise;
   private Set[] visibleSets;
   
-  ExerciseBox(int x, int y, int width, int height, String label, color widgetColor, color borderColor, color labelColor, PFont widgetFont, Workout workout, Consumer<Integer> optionClick, Exercise exercise)
+  ExerciseBox(int x, int y, int width, int height, String label, color widgetColor, color borderColor, color labelColor, PFont widgetFont, Workout workout, Consumer<Integer> optionClick, int visibleOptions, Exercise exercise)
   {
-    super(x, y, width, height, label, widgetColor, borderColor, labelColor, widgetFont, workout, optionClick);
+    super(x, y, width, height, label, widgetColor, borderColor, labelColor, widgetFont, workout, optionClick, visibleOptions);
     this.exercise = exercise;
-    this.visibleSets = new Set[VISIBLE_OPTIONS];
-    int limit = (this.exercise.getSets().size() < VISIBLE_OPTIONS ? this.exercise.getSets().size() : VISIBLE_OPTIONS);
+    this.visibleSets = new Set[this.getVisibleOptions()];
+    int limit = (this.exercise.getSets().size() < this.getVisibleOptions() ? this.exercise.getSets().size() : this.getVisibleOptions());
     for(int i = 0; i < limit; i++)
     {
       visibleSets[i] = this.exercise.getSets().get(i);
@@ -30,15 +30,15 @@ class ExerciseBox extends Listbox
   public void updateVisibleOptions()
   {
     int value = this.getScrollbar().getValue();
-    int diff = this.exercise.getSets().size() - VISIBLE_OPTIONS;
+    int diff = this.exercise.getSets().size() - this.getVisibleOptions();
     int divisions = (this.getScrollbar().getHeight() - this.getScrollbar().getSliderHeight()) / (diff);
     
-    for(int i = 0; i <= diff; i++)
+    for(int i = 0; i < diff; i++)
     {
       if(value > divisions * i && value <= divisions * (i + 1))
       {
         this.setOffset(i);
-        for(int j = 0; j < VISIBLE_OPTIONS; j++)
+        for(int j = 0; j < this.getVisibleOptions(); j++)
         {
           this.visibleSets[j] = exercise.getSets().get(i + j);
         }
@@ -47,7 +47,7 @@ class ExerciseBox extends Listbox
   }
   public void draw()
   {
-    int limit = (this.exercise.getSets().size() < VISIBLE_OPTIONS ? this.exercise.getSets().size() : VISIBLE_OPTIONS);
+    int limit = (this.exercise.getSets().size() < this.getVisibleOptions() ? this.exercise.getSets().size() : this.getVisibleOptions());
     
     stroke(this.getBorderColor());
     fill(WHITE);
@@ -72,7 +72,7 @@ class ExerciseBox extends Listbox
       text((i + this.getOffset()) + " " + visibleSets[i].toStr(), this.getX() + this.getWidth() / 2, this.getY() + (this.getHeight() * i) + (this.getHeight() / 2));
       }
       
-      if(this.exercise.getSets().size() > VISIBLE_OPTIONS)
+      if(this.exercise.getSets().size() > this.getVisibleOptions())
       {
         this.getScrollbar().draw();
         this.updateVisibleOptions();

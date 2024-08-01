@@ -17,7 +17,7 @@ void mousePressed()
   {
     Listbox l = allListBoxes.get(j);
     l.getScrollbar().getClicked(mouseX, mouseY);
-    for(int i = 0; i < l.VISIBLE_OPTIONS; i++)
+    for(int i = 0; i < l.getVisibleOptions(); i++)
     {
       l.optionIsClicked(i, mouseX, mouseY);
     }

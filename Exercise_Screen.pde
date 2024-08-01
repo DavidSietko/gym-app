@@ -13,7 +13,8 @@ class ExerciseScreen extends Screen
   ExerciseScreen()
   {
     this.added = true;
-    exercises = new Listbox((screenX / 2) - (boxWidth / 2), screenY / 5, boxWidth, boxHeight, "", GREY, BLACK, BLACK, font, currentWorkout, index -> selectExercise(index));
+   
+    exercises = new Listbox((screenX / 2) - (boxWidth / 2), screenY / 4, boxWidth, boxHeight, "", GREY, BLACK, BLACK, font, currentWorkout, index -> selectExercise(index), 10);
     addExercise = new Button(screenX - (screenX / 4), screenY / 18, buttonWidth / 2, buttonHeight / 2, "ADD", WHITE, BLACK, BLACK, font, () -> addExercise());
     nameBox = new Textbox((screenX / 2) - buttonWidth, (screenY / 2) - (buttonHeight / 2), buttonWidth * 2, buttonHeight, "ENTER NAME: ", WHITE, BLACK, BLACK, font);
     bar = new Bar(0, 0, screenX, 200, LIGHT_BLUE);
