@@ -116,7 +116,7 @@ class Scrollbar extends Widget
       toggleClick();
    }
   }
-  public void getDragged(int mY, int pY, int mX)
+  public void getDragged(int mY, int pY)
   {
     if(this.getIsHeld())
     {

@@ -19,6 +19,7 @@ class Listbox extends Widget
     this.width = width;
     this.height = height;
     this.label = label;
+    this.workout = workout;
     this.optionClick = optionClick;
     this.offset = 0;
     this.selected = -1;
@@ -28,19 +29,7 @@ class Listbox extends Widget
     this.scrollbarHeight = this.height * VISIBLE_OPTIONS;
     this.scrollbarX = x + this.width;
     this.scrollbarY = y;
-    
-    if(this.workout != null)
-    {
-      int limit = (this.workout.getExercises().size() > VISIBLE_OPTIONS ? this.workout.getExercises().size() : VISIBLE_OPTIONS);
-      for(int i = 0; i < limit ; i++)
-      {
-        this.visibleItems[i] = this.workout.getExercises().get(i);
-      }
-      this.setupScrollbar();
-    }
-    
-    
-    
+    this.setupScrollbar();
   }
   public void setupScrollbar()
   {
@@ -100,6 +89,20 @@ class Listbox extends Widget
   {
     return this.scrollbar;
   }
+  public void addExercise(String name)
+  {
+    this.workout.addExercise(name);
+    print(this.workout.getExercises().size());
+    int limit = (this.workout.getExercises().size() < VISIBLE_OPTIONS ? this.workout.getExercises().size() : VISIBLE_OPTIONS);
+    for(int i = 0; i < limit; i++)
+    {
+      visibleItems[i] = this.workout.getExercises().get(i + this.getOffset());
+    }
+    if(this.workout.getExercises().size() > VISIBLE_OPTIONS)
+    {
+      this.setupScrollbar();
+    }
+  }
   public void setupVisibleOptions()
   {
     int limit = (this.workout.getExercises().size() > VISIBLE_OPTIONS ? this.workout.getExercises().size() : VISIBLE_OPTIONS);
@@ -137,9 +140,9 @@ class Listbox extends Widget
     int diff = this.workout.getExercises().size() - VISIBLE_OPTIONS;
     int divisions = (this.scrollbar.getHeight() - this.scrollbar.getSliderHeight()) / (diff);
     
-    for(int i = 0; i < diff; i++)
+    for(int i = 0; i <= diff; i++)
     {
-      if(value > divisions * i && value <= divisions * (i + 1))
+      if(value >= divisions * i && value <= divisions * (i + 1))
       {
         this.setOffset(i);
         for(int j = 0; j < VISIBLE_OPTIONS; j++)

@@ -31,11 +31,11 @@ void isClicked(Integer index)
 void loadResources()
 {
   font = loadFont("3ds-Light-48.vlw");
+  currentWorkout = new Workout("");
   allButtons = new ArrayList<Button>();
   allListBoxes = new ArrayList<Listbox>();
   allTextboxes = new ArrayList<Textbox>();
   selectScreen = new SelectScreen();
   exerciseScreen = new ExerciseScreen();
   currentScreen = selectScreen;
-  currentWorkout = new Workout("");
 }

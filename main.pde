@@ -33,7 +33,7 @@ void mouseDragged()
   for(int j = 0; j < allListBoxes.size(); j++)
   {
     Listbox l = allListBoxes.get(j);
-    l.getScrollbar().getDragged(mouseY, pmouseY, mouseX);
+    l.getScrollbar().getDragged(mouseY, pmouseY);
   }
 }
 void mouseReleased()
