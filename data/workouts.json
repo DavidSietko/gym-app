@@ -1,0 +1,177 @@
+{"workouts": [
+  {
+    "date": "",
+    "exercises": [
+      {
+        "sets": [],
+        "name": "BARBELL BENCH"
+      },
+      {
+        "sets": [],
+        "name": "WEIGHTED DIPS"
+      },
+      {
+        "sets": [],
+        "name": "SEATED SHOULDER PRESS"
+      },
+      {
+        "sets": [],
+        "name": "INCLINE DUMBELL BENCH"
+      },
+      {
+        "sets": [],
+        "name": "DOUBLE ROPE EXTENSIONS"
+      },
+      {
+        "sets": [],
+        "name": "MACHINE LATERAL RAISES"
+      }
+    ],
+    "name": "PUSH DAY 1"
+  },
+  {
+    "date": "2024-08-22",
+    "exercises": [
+      {
+        "sets": [
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          }
+        ],
+        "name": "BARBELL SQUATS"
+      },
+      {
+        "sets": [
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          }
+        ],
+        "name": "LUNGES"
+      },
+      {
+        "sets": [
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          }
+        ],
+        "name": "CALF RAISES"
+      },
+      {
+        "sets": [
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          }
+        ],
+        "name": "RDLS"
+      },
+      {
+        "sets": [
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          },
+          {
+            "reps": 0,
+            "weight": 0
+          }
+        ],
+        "name": "LEG EXTENSIONS"
+      },
+      {
+        "sets": [],
+        "name": "LEG CURLS"
+      }
+    ],
+    "name": "LEG DAY"
+  },
+  {
+    "date": "",
+    "exercises": [
+      {
+        "sets": [],
+        "name": "PULL UPS"
+      },
+      {
+        "sets": [],
+        "name": "LAT PULLOVERS"
+      },
+      {
+        "sets": [],
+        "name": "CABLE ROWS"
+      },
+      {
+        "sets": [],
+        "name": "INCLINE DUMBELL CURLS"
+      },
+      {
+        "sets": [],
+        "name": "CABLE HAMMER CURLS"
+      },
+      {
+        "sets": [],
+        "name": "LOWER BACK EXTENSIONS"
+      }
+    ],
+    "name": "PULL DAY 1"
+  }
+]}

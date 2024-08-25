@@ -55,12 +55,16 @@ class Button extends Widget
   {
     this.textSize = textSize;
   }
+  public void toggleClick()
+  {
+    this.setClicked(!this.getClicked());
+  }
   
    public void isClicked(int mX, int mY)
   {
     if(mX > this.getX() && mX < this.getX() + width && mY > this.getY() && mY < this.getY() + height)
     {
-       this.setClicked(true);
+       toggleClick();
        onClick.run();
     }
   }
@@ -78,7 +82,14 @@ class Button extends Widget
   public void draw()
   {
     fill(this.getWidgetColor());
-    stroke(this.getBorderColor());
+    if(this.getClicked())
+    {
+      stroke(WHITE);
+    }
+    else
+    {
+      stroke(this.getBorderColor());
+    }
     rect(this.getX(), this.getY(), this.width, this.height);
     fill(this.getLabelColor());
     textAlign(CENTER, CENTER);
@@ -89,5 +100,15 @@ class Button extends Widget
     void changeColor(color newColor)
   {
     this.setWidgetColor(newColor);
+  }
+  public JSONObject toJSON()
+  {
+    JSONObject json = new JSONObject();
+    json.setString("label", this.getLabel());
+    return json;
+  }
+  public String fromJSON(JSONObject json)
+  {
+   return json.getString("label");
   }
 }

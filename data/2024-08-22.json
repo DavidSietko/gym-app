@@ -1,0 +1,112 @@
+{
+  "date": "2024-08-22",
+  "exercises": [
+    {
+      "sets": [
+        {
+          "reps": 12,
+          "weight": 20
+        },
+        {
+          "reps": 0,
+          "weight": 0
+        },
+        {
+          "reps": 0,
+          "weight": 0
+        }
+      ],
+      "name": "PULL UPS"
+    },
+    {
+      "sets": [
+        {
+          "reps": 12,
+          "weight": 70
+        },
+        {
+          "reps": 12,
+          "weight": 70
+        },
+        {
+          "reps": 0,
+          "weight": 0
+        }
+      ],
+      "name": "LAT PULLOVERS"
+    },
+    {
+      "sets": [
+        {
+          "reps": 8,
+          "weight": 45
+        },
+        {
+          "reps": 8,
+          "weight": 45
+        },
+        {
+          "reps": 8,
+          "weight": 45
+        }
+      ],
+      "name": "CABLE ROWS"
+    },
+    {
+      "sets": [
+        {
+          "reps": 8,
+          "weight": 20
+        },
+        {
+          "reps": 8,
+          "weight": 20
+        },
+        {
+          "reps": 8,
+          "weight": 20
+        },
+        {
+          "reps": 8,
+          "weight": 20
+        }
+      ],
+      "name": "INCLINE DUMBELL CURLS"
+    },
+    {
+      "sets": [
+        {
+          "reps": 12,
+          "weight": 75
+        },
+        {
+          "reps": 12,
+          "weight": 75
+        },
+        {
+          "reps": 12,
+          "weight": 75
+        }
+      ],
+      "name": "CABLE HAMMER CURLS"
+    },
+    {
+      "sets": [
+        {
+          "reps": 13,
+          "weight": 45
+        },
+        {
+          "reps": 13,
+          "weight": 45
+        },
+        {
+          "reps": 13,
+          "weight": 45
+        }
+      ],
+      "name": "LOWER BACK EXTENSIONS"
+    }
+  ],
+  "name": "PULL DAY 1"
+}

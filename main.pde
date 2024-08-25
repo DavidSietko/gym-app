@@ -13,35 +13,123 @@ void draw()
 }
 void mousePressed()
 {
-  for(int j = 0; j < allListBoxes.size(); j++)
+  if(currentScreen == selectScreen)
   {
-    Listbox l = allListBoxes.get(j);
-    l.getScrollbar().getClicked(mouseX, mouseY);
-    for(int i = 0; i < l.getVisibleOptions(); i++)
+    for(int i = 0; i < selectScreenButtons.size(); i++)
     {
-      l.optionIsClicked(i, mouseX, mouseY);
+       Button b = selectScreenButtons.get(i);
+       b.isClicked(mouseX, mouseY);
     }
   }
-  for(int i = 0; i < allButtons.size(); i++)
+  if(currentScreen == exerciseScreen)
   {
-    Button button = allButtons.get(i);
-    button.isClicked(mouseX, mouseY);
+    for(int i = 0; i < exerciseScreenButtons.size(); i++)
+    {
+      Button button = exerciseScreenButtons.get(i);
+      button.isClicked(mouseX, mouseY);
+    }
+    for(int i = 0; i < exerciseScreenListboxes.size(); i++)
+    {
+      Listbox l = exerciseScreenListboxes.get(i);
+      l.getScrollbar().getClicked(mouseX, mouseY);
+      for(int j = 0; j < l.getVisibleOptions(); j++)
+      {
+        l.optionIsClicked(j, mouseX, mouseY);
+      }
+    }
+  }
+  if(currentScreen == editScreen)
+  {
+    for(int i = 0; i < editScreenButtons.size(); i++)
+    {
+      Button b = editScreenButtons.get(i);
+      b.isClicked(mouseX, mouseY);
+    }
+    for(int i = 0; i < editScreenTextboxes.size(); i++)
+    {
+      Textbox box = editScreenTextboxes.get(i);
+      box.isClicked(mouseX, mouseY);
+    }
+    for(int i = 0; i < editScreenListboxes.size(); i++)
+    {
+      Listbox l = editScreenListboxes.get(i);
+      l.getScrollbar().getClicked(mouseX, mouseY);
+      for(int j = 0; j < l.getVisibleOptions(); j++)
+      {
+        l.optionIsClicked(j, mouseX, mouseY);
+      }
+    }
+  }
+  if(currentScreen == workoutScreen)
+  {
+    for(int i = 0; i < workoutScreenButtons.size(); i++)
+    {
+      Button b = workoutScreenButtons.get(i);
+      b.isClicked(mouseX, mouseY);
+    }
+    for(int i = 0; i < workoutScreenListboxes.size(); i++)
+    {
+      Listbox l = workoutScreenListboxes.get(i);
+      l.getScrollbar().getClicked(mouseX, mouseY);
+      for(int j = 0; j < l.getVisibleOptions(); j++)
+      {
+        l.optionIsClicked(j, mouseX, mouseY);
+      }
+    }
   }
 }
 void mouseDragged()
 {
-  for(int j = 0; j < allListBoxes.size(); j++)
+  if(currentScreen == exerciseScreen)
   {
-    Listbox l = allListBoxes.get(j);
-    l.getScrollbar().getDragged(mouseY, pmouseY);
+    for(int i = 0; i < exerciseScreenListboxes.size(); i++)
+    {
+      Listbox l = exerciseScreenListboxes.get(i);
+      l.getScrollbar().getDragged(mouseY, pmouseY);
+    }
+  }
+  if(currentScreen == editScreen)
+  {
+    for(int i = 0; i < editScreenListboxes.size(); i++)
+    {
+      Listbox l = editScreenListboxes.get(i);
+      l.getScrollbar().getDragged(mouseY, pmouseY);
+    }
+  }
+  if(currentScreen == workoutScreen)
+  {
+    for(int i = 0; i < workoutScreenListboxes.size(); i++)
+    {
+      Listbox l = workoutScreenListboxes.get(i);
+      l.getScrollbar().getDragged(mouseY, pmouseY);
+    }
   }
 }
 void mouseReleased()
 {
-  for(int j = 0; j < allListBoxes.size(); j++)
+  if(currentScreen == exerciseScreen)
   {
-    Listbox l = allListBoxes.get(j);
-    l.getScrollbar().toggleRelease();
+    for(int i = 0; i < exerciseScreenListboxes.size(); i++)
+    {
+      Listbox l = exerciseScreenListboxes.get(i);
+      l.getScrollbar().toggleRelease();
+    }
+  }
+  if(currentScreen == editScreen)
+  {
+    for(int i = 0; i < editScreenListboxes.size(); i++)
+    {
+      Listbox l = editScreenListboxes.get(i);
+      l.getScrollbar().toggleRelease();
+    }
+  }
+  if(currentScreen == workoutScreen)
+  {
+    for(int i = 0; i < workoutScreenListboxes.size(); i++)
+    {
+      Listbox l = workoutScreenListboxes.get(i);
+      l.getScrollbar().toggleRelease();
+    }
   }
 }
 void mouseMoved()
@@ -50,10 +138,37 @@ void mouseMoved()
 }
 void keyPressed()
 {
-  for(int i = 0; i < allTextboxes.size(); i++)
+  if(currentScreen == selectScreen)
   {
-    Textbox textbox = allTextboxes.get(i);
-    textbox.editText();
-    textbox.stopEditing();
+    for(int i = 0; i < selectScreenTextboxes.size(); i++)
+    {
+      Textbox textbox = selectScreenTextboxes.get(i);
+      textbox.editText();
+      textbox.stopEditing();
+    }
   }
+  if(currentScreen == exerciseScreen)
+  {
+    for(int i = 0; i < exerciseScreenTextboxes.size(); i++)
+    {
+      Textbox textbox = exerciseScreenTextboxes.get(i);
+      textbox.editText();
+      textbox.stopEditing();
+    }
+  }
+  if(currentScreen == editScreen)
+  {
+    for(int i = 0; i < editScreenTextboxes.size(); i++)
+    {
+      Textbox textbox = editScreenTextboxes.get(i);
+      textbox.editText();
+      textbox.stopEditing();
+    }
+  }
+}
+void exit()
+{
+  saveButtons(selectScreen.workoutButtons, "buttons.json");
+  saveButtonWorkouts(selectScreen.workouts, "workouts.json");
+  saveWorkout(currentWorkout);
 }

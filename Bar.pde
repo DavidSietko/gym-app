@@ -3,14 +3,20 @@ class Bar
   private int x, y;
   private int barWidth, barHeight;
   private color barColor;
+  private String label;
+  private color labelColor;
+  private int textSize;
   
-  Bar(int x, int y, int barWidth, int barHeight, color barColor)
+  Bar(int x, int y, int barWidth, int barHeight, String label, color barColor, color labelColor)
   {
     this.x = x;
     this.y = y;
     this.barWidth = barWidth;
     this.barHeight = barHeight;
     this.barColor = barColor;
+    this.label = label;
+    this.labelColor = labelColor;
+    this.textSize = 12;
   }
   public int getX()
   {
@@ -52,11 +58,40 @@ class Bar
   {
     this.barColor = barColor;
   }
+  public String getLabel()
+  {
+    return this.label;
+  }
+  public void setLabel(String label)
+  {
+    this.label = label;
+  }
+  public color getLabelColor()
+  {
+    return this.labelColor;
+  }
+  public void setLabelColor(color labelColor)
+  {
+    this.labelColor = labelColor;
+  }
+  public int getTextSize()
+  {
+    return this.textSize;
+  }
+  public void setTextSize(int textSize)
+  {
+    this.textSize = textSize;
+  }
   
   public void draw()
   {
     noStroke();
     fill(this.getBarColor());
     rect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+    
+    fill(this.getLabelColor());
+    textAlign(CENTER, CENTER);
+    textSize(this.getTextSize());
+    text(this.getLabel(), this.getX() + this.getWidth() / 2, this.getY() + this.getHeight() / 2);
   }
 }

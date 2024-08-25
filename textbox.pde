@@ -3,7 +3,7 @@ class Textbox extends Widget
   private int width, height;
   private String text, label;
   private boolean isEditable;
-  final int TEXT_LENGTH = 10;
+  private int textLength = 10;
   private int textSize;
   
   Textbox(int x, int y, int width, int height, String label, color widgetColor, color borderColor, color labelColor, PFont widgetFont)
@@ -55,12 +55,20 @@ class Textbox extends Widget
   {
     this.textSize = textSize;
   }
+  public int getTextLength()
+  {
+    return this.textLength;
+  }
+  public void setTextLength(int textLength)
+  {
+    this.textLength = textLength;
+  }
   
   public void isClicked(int mX, int mY)
   {
     if(mX > this.getX() && mX < this.getX() + this.getWidth() && mY > this.getY() && mY < this.getY() + this.getHeight())
     {
-      this.setIsEditable(true);
+      this.setIsEditable(!this.getIsEditable());
     }
   }
   public void stopEditing()
@@ -85,14 +93,13 @@ class Textbox extends Widget
           this.text = this.getText() + key;
         }
       }
-
     }
   }
   public void keepInBox()
   {
-    if(this.getText().length() > TEXT_LENGTH)
+    if(this.getText().length() > this.getTextLength())
     {
-      this.text = this.getText().substring(0, TEXT_LENGTH - 1);;
+      this.text = this.getText().substring(0, this.getTextLength() - 1);;
     }
   }
   public void draw()
@@ -109,9 +116,9 @@ class Textbox extends Widget
     textFont(this.getWidgetFont());
     textSize(textSize);
     textAlign(RIGHT, CENTER);
-    text(this.getLabel(), this.getX() + this.width / 2, this.getY() + this.height / 2);
+    text(this.getLabel(), this.getX() + this.width / 3, this.getY() + this.height / 2);
     textAlign(LEFT, CENTER);
-    text(this.getText(), this.getX() + this.width / 2, this.getY() + this.height / 2);
+    text(this.getText(), this.getX() + this.width / 3, this.getY() + this.height / 2);
     this.keepInBox();
   }
 }
