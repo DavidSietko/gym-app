@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
-int screenX = 2000;
-int screenY = 1000;
+int screenX = displayWidth;
+int screenY = displayHeight;
 final color WHITE = color(255);
 final color BLACK = color(0);
 final color RED = color(255, 0, 0);
@@ -10,10 +10,10 @@ final color BLUE = color(0, 0, 255);
 final color GREY = color(150);
 final color LIGHT_BLUE = color(173, 216, 230);
 
-int boxWidth = 200;
-int boxHeight = 50;
-int buttonWidth = 200;
-int buttonHeight = 200;
+int boxWidth;
+int boxHeight;
+int buttonWidth;
+int buttonHeight;
 PFont font;
 
 String path = "data/";
@@ -45,6 +45,12 @@ LocalDate currentDate;
 
 void loadResources()
 {
+  screenX = displayWidth;
+  screenY = displayHeight;
+  boxWidth = displayWidth / 10;
+  boxHeight = displayHeight / 20;
+  buttonWidth = displayWidth / 10;
+  buttonHeight = displayHeight / 5;
   font = loadFont("3ds-Light-48.vlw");
   today = LocalDate.now();
   currentDate = today;

@@ -1,6 +1,6 @@
 void settings()
 {
-  size(screenX, screenY);
+   size(displayWidth, displayHeight);
 }
 void setup()
 {
@@ -54,7 +54,7 @@ void mousePressed()
     {
       Listbox l = editScreenListboxes.get(i);
       l.getScrollbar().getClicked(mouseX, mouseY);
-      for(int j = 0; j < l.getVisibleOptions(); j++)
+      for(int j = 0; j <= l.getVisibleOptions(); j++)
       {
         l.optionIsClicked(j, mouseX, mouseY);
       }

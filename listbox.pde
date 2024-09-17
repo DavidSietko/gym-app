@@ -25,7 +25,7 @@ class Listbox extends Widget
     this.selected = -1;
     this.visibleOptions = visibleOptions;
     this.visibleItems = new Exercise[this.getVisibleOptions()];
-    this.scrollbarWidth = this.width / 10;
+    this.scrollbarWidth = 50;
     this.scrollbarHeight = this.height * this.getVisibleOptions();
     this.scrollbarX = x + this.width;
     this.scrollbarY = y;
@@ -178,15 +178,13 @@ class Listbox extends Widget
     {
       visibleItems[i] = this.workout.getExercises().get(i + this.getOffset());
     }
-  }
-  
+  } 
   public void optionIsClicked(int index, int mX, int mY)
   {
-    
-    if(index>= this.getVisibleItems().length) {return;}
+    if(index >= this.getVisibleItems().length) {return;}
     else
     {
-      if(mX > this.getX() && mX < this.getX() + this.getWidth() && mY > this.getY() + this.getHeight() * (index) && mY < this.getY() + this.getHeight() * (index + 1))
+      if(mX > this.getX() && mX < this.getX() + this.getWidth() && mY >= this.getY() + (this.getHeight() * index) && mY <= this.getY() + (this.getHeight() * (index + 1)))
       {
         if(this.getSelected() == index + this.getOffset())
         {

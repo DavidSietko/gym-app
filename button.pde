@@ -82,7 +82,7 @@ class Button extends Widget
   public void draw()
   {
     fill(this.getWidgetColor());
-    if(this.getClicked())
+    if(isHovering(mouseX, mouseY))
     {
       stroke(WHITE);
     }

@@ -8,7 +8,7 @@ class ExerciseScreen extends Screen
   private int boxHeight = 50;
   private boolean added;
   private Bar bar;
-  private Errorbox errorBox;
+  private Errorbox errorBox, tooMuch;
   private boolean exists, isSelected, editing;
   private int selectedExercise;
   
@@ -19,25 +19,28 @@ class ExerciseScreen extends Screen
     this.isSelected = false;
     this.editing = false;
    
-    exercises = new Listbox((screenX / 2) - (boxWidth), screenY / 3, boxWidth * 2, boxHeight, "", GREY, BLACK, BLACK, font, currentWorkout, index -> selectExercise(index), 10);
-    addExercise = new Button(screenX - (screenX / 8), screenY / 18, buttonWidth / 2, buttonHeight / 2, "ADD", WHITE, BLACK, BLACK, font, () -> addExercise());
-    nameBox = new Textbox((screenX / 2) - (buttonWidth + (buttonWidth / 2)), (screenY / 2) - (buttonHeight / 2), buttonWidth * 3, buttonHeight, "ENTER NAME: ", WHITE, BLACK, BLACK, font);
+    exercises = new Listbox(0, 0, screenX, boxHeight + (boxHeight / 2), "", GREY, BLACK, BLACK, font, currentWorkout, index -> selectExercise(index), 8);
     bar = new Bar(0, 0, screenX, 200, exercises.getWorkout().getName(), LIGHT_BLUE, WHITE);
-    errorBox = new Errorbox((screenX / 2) - buttonWidth, (screenY / 2) - (buttonHeight / 2), buttonWidth * 2, buttonHeight, "This exercise already exists", BLUE, BLACK, WHITE, font);
-    selected = new Button((screenX / 2) - (boxWidth / 4), (screenY - buttonHeight / 2) - (buttonHeight / 4), buttonWidth / 2, buttonHeight / 2, "SELECT", LIGHT_BLUE, BLACK, BLACK, font, () -> select());
-    finishButton = new Button((screenX / 2) - (boxWidth / 4), (screenY / 2) - (buttonWidth + 15 + (buttonWidth / 3)), buttonWidth / 2, buttonHeight / 2, "FINISH", LIGHT_BLUE, BLACK, BLACK, font, () -> finish());
-    editButton = new Button((screenX / 2) - buttonWidth * 2, (screenY - buttonHeight / 2) - (buttonHeight / 4), buttonWidth, buttonHeight / 2, "EDIT", LIGHT_BLUE, BLACK, BLACK, font,() -> editExercise());
-    removeButton = new Button((screenX / 2) + buttonWidth, (screenY - buttonHeight / 2) - (buttonHeight / 4), buttonWidth, buttonHeight / 2, "REMOVE", LIGHT_BLUE, BLACK, BLACK, font,() -> removeExercise());
+    exercises.setY(bar.getHeight());
+    addExercise = new Button(screenX - (screenX / 8), screenY / 24, buttonWidth / 2, buttonHeight / 2, "ADD", WHITE, BLACK, BLACK, font, () -> addExercise());
+    nameBox = new Textbox((screenX / 2) - (buttonWidth + (buttonWidth / 2)), (screenY / 2) - (buttonHeight / 2), buttonWidth * 3, buttonHeight, "ENTER NAME: ", WHITE, BLACK, BLACK, font);
+    errorBox = new Errorbox((screenX / 2) - (buttonWidth + buttonWidth / 2), screenY / 2 - buttonHeight, buttonWidth * 3, buttonHeight, "This exercise already exists", BLUE, BLACK, WHITE, font);
+    tooMuch = new Errorbox((screenX / 2) - (buttonWidth + buttonWidth / 2), (screenY / 2) - (buttonHeight), buttonWidth * 3, buttonHeight, "Max amount of exercises entered!", BLUE, BLACK, WHITE, font);
+    selected = new Button((screenX / 2) - (boxWidth / 4), (screenY - (buttonHeight + buttonHeight / 6)), buttonWidth / 2, buttonHeight / 2, "SELECT", LIGHT_BLUE, BLACK, BLACK, font, () -> select());
+    finishButton = new Button(screenX / 8, screenY / 24, buttonWidth / 2, buttonHeight / 2, "FINISH", WHITE, BLACK, BLACK, font, () -> finish());
+    editButton = new Button((screenX / 2) - buttonWidth * 2, (screenY - (buttonHeight + buttonHeight / 6)), buttonWidth, buttonHeight / 2, "EDIT", LIGHT_BLUE, BLACK, BLACK, font,() -> editExercise());
+    removeButton = new Button((screenX / 2) + buttonWidth, (screenY - (buttonHeight + buttonHeight / 6)), buttonWidth, buttonHeight / 2, "REMOVE", LIGHT_BLUE, BLACK, BLACK, font,() -> removeExercise());
     
     exerciseScreenButtons.add(addExercise); exerciseScreenButtons.add(selected); exerciseScreenButtons.add(errorBox.getOkButton()); exerciseScreenButtons.add(editButton); exerciseScreenButtons.add(removeButton);
+    exerciseScreenButtons.add(tooMuch.getOkButton());
     exerciseScreenTextboxes.add(nameBox); 
     exerciseScreenListboxes.add(exercises);
     
     nameBox.setTextLength(30);
-    editButton.setTextSize(20);
+    editButton.setTextSize(20); finishButton.setTextSize(20);
     removeButton.setTextSize(20);
     nameBox.setTextSize(28);
-    errorBox.setTextSize(30);
+    errorBox.setTextSize(30); tooMuch.setTextSize(30); addExercise.setTextSize(20); selected.setTextSize(20);
   }
   public boolean getAdded()
   {
@@ -83,6 +86,10 @@ class ExerciseScreen extends Screen
     selected.draw();
     editButton.draw();
     removeButton.draw();
+    if(tooMuch.getError())
+    {
+      tooMuch.draw();
+    }
     if(nameBox.getIsEditable())
     {
       nameBox.draw();
@@ -151,13 +158,21 @@ class ExerciseScreen extends Screen
       currentExercise = exercises.getWorkout().getExercises().get(index);
       editScreen.setBox.setExercise(currentExercise);
       editScreen.setBox.setupScrollbar();
+      exercises.setSelected(-1);
       currentScreen = editScreen;
     }
   }
   public void addExercise()
   {
-    nameBox.setIsEditable(true);
-    this.setAdded(false);
+    if(exercises.getWorkout().getExercises().size() >= exercises.getVisibleOptions())
+    {
+      this.tooMuch.setError(true);
+    }
+    else
+    {
+      nameBox.setIsEditable(true);
+      this.setAdded(false);
+    }
   }
   public void select()
   {

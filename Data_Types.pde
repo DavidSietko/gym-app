@@ -34,6 +34,10 @@ class Workout
   {
     this.exercises.add(new Exercise(name));
   }
+  public void removeExercise(Exercise exercise)
+  {
+    this.exercises.remove(exercise);
+  }
   public Exercise getSpecificExercise(String name)
   {
     Exercise exercise = new Exercise("");
@@ -100,6 +104,10 @@ class Exercise
   public void addSet(int weight, int reps)
   {
     this.sets.add(new Set(weight, reps));
+  }
+  public void clearSets()
+  {
+    this.getSets().clear();
   }
   
   public JSONObject toJSON()

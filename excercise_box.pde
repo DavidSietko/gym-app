@@ -92,6 +92,25 @@ class ExerciseBox extends Listbox
       }
     }
   }
+  public void optionIsClicked(int index, int mX, int mY)
+  {
+    if(index >= this.getExercise().getSets().size()) {return;}
+    else
+    {
+      if(mX > this.getX() && mX < this.getX() + this.getWidth() && mY > this.getY() + (this.getHeight() * index) && mY < this.getY() + (this.getHeight() * (index + 1)))
+      {
+        if(this.getSelected() == index + this.getOffset())
+        {
+          this.setSelected(-1);
+        }
+        else
+        {
+          this.setSelected(index + this.getOffset());
+          this.optionClick.accept(index + this.getOffset());
+        }
+      }
+    }
+  }
   public void draw()
   {
     int limit = (this.exercise.getSets().size() < this.getVisibleOptions() ? this.exercise.getSets().size() : this.getVisibleOptions());

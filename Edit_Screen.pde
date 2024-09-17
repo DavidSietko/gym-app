@@ -15,14 +15,14 @@ class EditScreen extends Screen
   {
     this.editable = false;
     
-    setBox = new ExerciseBox((screenX / 2) - (boxWidth), (screenY / 2) + 20, boxWidth * 2, boxHeight * 2, "", GREY, BLACK, BLACK, font, currentWorkout, index -> selectSet(index), 3, currentExercise);
-    weightBox = new Numberbox((screenX / 2) - (boxWidth), screenY / 4, boxWidth * 2, boxHeight * 2, "WEIGHT: ", WHITE, BLACK, BLACK, font);
-    repBox = new Numberbox((screenX / 2) - (boxWidth), (screenY / 4) +  (boxHeight * 2), boxWidth * 2, boxHeight * 2, "REPS:", WHITE, BLACK, BLACK, font);
-    addSet = new Button(screenX - (screenX / 8), screenY / 18, buttonWidth / 2, buttonHeight / 2, "ADD SET", WHITE, BLACK, BLACK, font, () -> addSet());
-    removeButton = new Button((screenX / 2) + buttonWidth, (screenY - buttonHeight / 2) - (buttonHeight / 4), buttonWidth, buttonHeight / 2, "REMOVE", LIGHT_BLUE, BLACK, BLACK, font,() -> removeSet());
-    editButton = new Button((screenX / 2) - buttonWidth * 2, (screenY - buttonHeight / 2) - (buttonHeight / 4), buttonWidth, buttonHeight / 2, "EDIT", LIGHT_BLUE, BLACK, BLACK, font,() -> editSet());
-    saveButton = new Button((screenX / 2) - buttonWidth * 2, (screenY - buttonHeight / 2) - (buttonHeight / 4), buttonWidth, buttonHeight / 2, "SAVE", BLUE, BLACK, BLACK, font,() -> saveSet());
-    finishButton = new Button(screenX - (screenX / 8) - (buttonWidth), screenY / 18, buttonWidth / 2, buttonHeight / 2, "FINISH", WHITE, BLACK, BLACK, font, () -> finish());
+    setBox = new ExerciseBox((screenX / 2) - (boxWidth * 4), (screenY / 2) + 20, boxWidth * 8, boxHeight * 2, "", GREY, BLACK, BLACK, font, currentWorkout, index -> selectSet(index), 3, currentExercise);
+    weightBox = new Numberbox((screenX / 2) - (boxWidth * 2), screenY / 4, boxWidth * 4, boxHeight * 2, "WEIGHT: ", WHITE, BLACK, BLACK, font);
+    repBox = new Numberbox((screenX / 2) - (boxWidth * 2), (screenY / 4) +  (boxHeight * 2), boxWidth * 4, boxHeight * 2, "REPS:", WHITE, BLACK, BLACK, font);
+    addSet = new Button(screenX - (screenX / 8), screenY / 24, buttonWidth / 2, buttonHeight / 2, "ADD SET", WHITE, BLACK, BLACK, font, () -> addSet());
+    removeButton = new Button((screenX / 2) + buttonWidth * 3, (screenY - (screenY / 2) - (buttonHeight - buttonHeight / 3)) - (buttonHeight / 4), buttonWidth, buttonHeight / 2, "REMOVE", LIGHT_BLUE, BLACK, BLACK, font,() -> removeSet());
+    editButton = new Button((screenX / 2) - buttonWidth * 4, (screenY - (screenY / 2) - (buttonHeight - buttonHeight / 3)) - (buttonHeight / 4), buttonWidth, buttonHeight / 2, "EDIT", LIGHT_BLUE, BLACK, BLACK, font,() -> editSet());
+    saveButton = new Button((screenX / 2) - buttonWidth * 4, (screenY - (screenY / 2) - (buttonHeight - buttonHeight / 3)) - (buttonHeight / 4), buttonWidth, buttonHeight / 2, "SAVE", BLUE, BLACK, BLACK, font,() -> saveSet());
+    finishButton = new Button(screenX - (screenX / 8) - (buttonWidth), screenY / 24, buttonWidth / 2, buttonHeight / 2, "FINISH", WHITE, BLACK, BLACK, font, () -> finish());
     currentButton = editButton;
 
     bar = new Bar(0, 0, screenX, 200, currentExercise.getName(), LIGHT_BLUE, WHITE);
@@ -62,12 +62,13 @@ class EditScreen extends Screen
   public void selectSet(int index)
   {
     selectedSet = index;
+    println(index);
   }
   public void editSet()
   {
+    this.setEditable(!this.getEditable());
     if(currentExercise.getSets().size() > 0)
     {
-      this.setEditable(true);
       editScreenButtons.remove(editButton);
       currentButton = saveButton;
       editScreenButtons.add(saveButton);
@@ -90,6 +91,7 @@ class EditScreen extends Screen
   public void finish()
   {
     workoutScreen.addExerciseBox(setBox);
+    workoutScreen.addButtons();
     currentScreen = workoutScreen;
   }
   public void draw()
@@ -108,7 +110,7 @@ class EditScreen extends Screen
       fill(BLUE);
       textAlign(RIGHT, BOTTOM);
       textSize(24);
-      text("CLICK ON A SET, EDIT THE VALUES AND CLICK SAVE", screenX / 3 - 100, screenY - 50);
+      text("CLICK ON A SET, EDIT THE VALUES AND CLICK SAVE", screenX / 2 + buttonWidth, (screenY + buttonWidth / 5) - buttonWidth);
     }
   }
 }

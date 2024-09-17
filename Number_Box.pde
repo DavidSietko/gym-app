@@ -22,4 +22,23 @@ class Numberbox extends Textbox
       }
     }
   }
+    public void draw()
+  {
+    stroke(this.getBorderColor());
+    if(this.getIsEditable())
+    {
+      stroke(BLUE);
+    }
+    fill(this.getWidgetColor());
+    rect(this.getX(), this.getY(), this.getWidth(), this.getHeight());
+    
+    fill(this.getLabelColor());
+    textFont(this.getWidgetFont());
+    textSize(this.getTextSize());
+    textAlign(RIGHT, CENTER);
+    text(this.getLabel(), this.getX() + this.getWidth() / 5, this.getY() + this.getHeight() / 2);
+    textAlign(LEFT, CENTER);
+    text(this.getText(), this.getX() + this.getWidth() / 3, this.getY() + this.getHeight() / 2);
+    this.keepInBox();
+  }
 }

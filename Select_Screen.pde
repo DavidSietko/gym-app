@@ -6,10 +6,8 @@ class SelectScreen extends Screen
   private Workout workout;
   String fileName = "buttons.json";
   private Button createWorkout;
-  private int buttonWidth = 250;
-  private int buttonHeight = 200;
-  private int margin = 308;
-  private int buttonMargin = 100;
+  private int margin = 295;
+  private int buttonMargin = buttonWidth / 2;
   private Textbox nameBox;
   private boolean created, removing, creatingWorkout;
   private Bar bar;
@@ -17,15 +15,15 @@ class SelectScreen extends Screen
   
   SelectScreen()
   {
-    createWorkout = new Button((screenX / 2) - (buttonWidth + buttonMargin), (screenY - buttonHeight / 2) - (margin / 4), buttonWidth, buttonHeight / 2, "CREATE WORKOUT", LIGHT_BLUE, BLACK, BLACK, font,() -> createWorkout());
-    removeButton = new Button((screenX / 2) + buttonMargin, (screenY - buttonHeight / 2) - (margin / 4), buttonWidth, buttonHeight / 2, "REMOVE", LIGHT_BLUE, BLACK, BLACK, font,() -> removeButton());
+    createWorkout = new Button((screenX / 2) - (buttonWidth + buttonMargin), (screenY - buttonHeight) - (margin / 4), buttonWidth, buttonHeight / 2, "CREATE WORKOUT", LIGHT_BLUE, BLACK, BLACK, font,() -> createWorkout());
+    removeButton = new Button((screenX / 2) + buttonMargin, (screenY - buttonHeight) - (margin / 4), buttonWidth, buttonHeight / 2, "REMOVE", LIGHT_BLUE, BLACK, BLACK, font,() -> removeButton());
     selectScreenButtons.add(createWorkout); selectScreenButtons.add(removeButton);
     workoutButtons = new ArrayList<Button>();
     workouts = loadButtonWorkouts("workouts.json");
     buttonNames = loadButtons(fileName);
     for(int i = 0; i < buttonNames.size(); i++)
     {
-      workoutButtons.add(new Button((workoutButtons.size() < 6  ? (workoutButtons.size() * margin) + (workoutButtons.size() < 0 ? margin : margin / 3) : ((workoutButtons.size() - 6) * margin) + (workoutButtons.size() == 5 ? margin : margin / 3)) , (screenY / 2) - buttonHeight + (workoutButtons.size() < 6  ? 0 : margin), buttonWidth, buttonHeight, buttonNames.get(i), LIGHT_BLUE, BLACK , BLACK, font, () -> selectWorkout()));
+      workoutButtons.add(new Button((workoutButtons.size() < 6  ? (workoutButtons.size() * margin) + (workoutButtons.size() < 0 ? margin : margin / 3) : ((workoutButtons.size() - 6) * margin) + (workoutButtons.size() == 5 ? margin : margin / 3)) , (screenY / 2 - buttonHeight / 2) - buttonHeight + (workoutButtons.size() < 6  ? 0 : margin), buttonWidth + buttonWidth / 3, buttonHeight, buttonNames.get(i), LIGHT_BLUE, BLACK , BLACK, font, () -> selectWorkout()));
       selectScreenButtons.add(workoutButtons.get(i));
     }
     nameBox = new Textbox((screenX / 3) - buttonWidth / 5, (screenY / 2) - (buttonHeight / 2), buttonWidth * 3, buttonHeight, "ENTER NAME: ", WHITE, BLACK, BLACK, font);
@@ -120,7 +118,7 @@ class SelectScreen extends Screen
     else if(!this.getCreated())
     {
       this.setCreatingWorkout(true);
-      Button workoutButton = new Button((workoutButtons.size() < 6  ? (workoutButtons.size() * margin) + (workoutButtons.size() < 0 ? margin : margin / 3) : ((workoutButtons.size() - 6) * margin) + (workoutButtons.size() == 5 ? margin : margin / 3)) , (screenY / 2) - buttonHeight + (workoutButtons.size() < 6  ? 0 : margin), buttonWidth, buttonHeight, nameBox.getText(), LIGHT_BLUE, BLACK , BLACK, font, () -> selectWorkout());
+      Button workoutButton = new Button((workoutButtons.size() < 6  ? (workoutButtons.size() * margin) + (workoutButtons.size() < 0 ? margin : margin / 3) : ((workoutButtons.size() - 6) * margin) + (workoutButtons.size() == 5 ? margin : margin / 3)) , (screenY / 2 - buttonHeight / 2) - buttonHeight + (workoutButtons.size() < 6  ? 0 : margin), buttonWidth + buttonWidth / 3, buttonHeight, nameBox.getText(), LIGHT_BLUE, BLACK , BLACK, font, () -> selectWorkout());
       workoutButtons.add(workoutButton);
       workout = new Workout(nameBox.getText(), "");
       workouts.add(workout);
@@ -137,7 +135,7 @@ class SelectScreen extends Screen
       fill(BLUE);
       textAlign(LEFT, BOTTOM);
       textSize(32);
-      text(("CLICK ON A WORKOUT TO REMOVE IT"), 0 + buttonMargin, screenY - buttonMargin);
+      text(("CLICK ON A WORKOUT TO REMOVE IT"), 0 + buttonMargin, screenY - buttonMargin * 2);
     }
   }
 }
