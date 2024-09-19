@@ -280,7 +280,7 @@ class WorkoutScreen extends Screen
       fill(BLUE);
       textSize(24);
       textAlign(BOTTOM, CENTER);
-      text("CLICK ON A WORKOUT TO REMOVE IT", screenX / 3 + buttonWidth, screenY - buttonWidth);
+      text("CLICK ON AN EXERCISE TO REMOVE IT", screenX / 3 + buttonWidth, screenY - buttonWidth);
     }
   }
 }

@@ -62,13 +62,12 @@ class EditScreen extends Screen
   public void selectSet(int index)
   {
     selectedSet = index;
-    println(index);
   }
   public void editSet()
   {
-    this.setEditable(!this.getEditable());
-    if(currentExercise.getSets().size() > 0)
+    if(currentExercise.getSets().size() > 0 && setBox.getSelected() >= 0)
     {
+      this.setEditable(!this.getEditable());
       editScreenButtons.remove(editButton);
       currentButton = saveButton;
       editScreenButtons.add(saveButton);
@@ -90,6 +89,8 @@ class EditScreen extends Screen
   }
   public void finish()
   {
+    setBox.setSelected(-1);
+    setBox.setOffset(0);
     workoutScreen.addExerciseBox(setBox);
     workoutScreen.addButtons();
     currentScreen = workoutScreen;

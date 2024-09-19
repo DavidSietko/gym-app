@@ -156,7 +156,7 @@ class ExerciseScreen extends Screen
     else if(this.getIsSelected())
     {
       currentExercise = exercises.getWorkout().getExercises().get(index);
-      editScreen.setBox.setExercise(currentExercise);
+      editScreen.setBox.setExercise(currentWorkout.getSpecificExercise(currentExercise.getName()));
       editScreen.setBox.setupScrollbar();
       exercises.setSelected(-1);
       currentScreen = editScreen;
